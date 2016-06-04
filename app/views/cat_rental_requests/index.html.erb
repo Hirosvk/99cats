@@ -1,0 +1,18 @@
+<h1>All Rental Requests</h1>
+
+<%= flash[:errors] %>
+
+<table border="1">
+  <% all_cat_rental_requests.each do |rental_request| %>
+  <tr>
+    <td><%= rental_request.cat.name %></td>
+    <td><%= rental_request.start_date %></td>
+    <td><%= rental_request.end_date %></td>
+    <td><%= rental_request.status %></td>
+    <td><%= button_to "Approve", approve_cat_rental_request_url(rental_request.id), method: "post"%></td>
+    <td><%= button_to "Deny", deny_cat_rental_request_url(rental_request.id), method: "post"%></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "Back to Index", cats_url %>

@@ -1,0 +1,42 @@
+<% url = cat.persisted? ? cat_url(cat.id) : cats_url %>
+<% verb = cat.persisted? ? "patch" : "post" %>
+
+<form action="<%= url %>" method="post">
+
+  <%= auth_token %>
+
+  <input type="hidden" name="_method" value="<%=verb%>">
+
+
+  <label for="cat_name">Cat's name</label>
+  <input type="text" name="cat[name]" id="cat_name" value="<%= cat.name %>">
+
+  <label for="cat_birthday">Cat's Birthday</label>
+  <input type="date" name="cat[birth_date]" id="cat_birthday"
+    value="<%= cat.birth_date %>">
+
+  <select name="cat[color]">
+    <option disabled selected> -- Pick a Color -- </option>
+    <% colors.each do |color| %>
+      <option value="<%= color %>" <%= "selected" if cat.color  == color%>>
+      <%= color.capitalize %></option>
+    <% end %>
+  </select>
+
+
+  <input type="radio" name="cat[sex]" id="cat_male" value="M"
+    <%= cat.sex == 'M' ? "checked" : ""%>>
+  <label for="cat_male">Male</label>
+
+  <input type="radio" name="cat[sex]" id="cat_female" value="F"
+    <%= cat.sex == 'F' ? "checked" : ""%>>
+  <label for="cat_female">Female</label>
+
+  <label for="description">Cat's Description</label>
+  <textarea name="cat[description]" id="description"
+    cols="50" rows="10"><%= cat.description %></textarea>
+
+  <input type="submit" value="Submit">
+</form>
+
+<%= link_to "Back to Index", cats_url %>

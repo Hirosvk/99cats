@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NinetyNinecats</title>
+  <!-- <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> -->
+  <%= csrf_meta_tags %>
+  <% if current_user.nil? %>
+    <%= button_to "Log in", new_session_url, method: :get %>
+  <% else %>
+    <%= "Hello #{current_user.username}"%>
+    <%= button_to "Log out", session_url, method: :delete %>
+  <% end %>
+  <%= yield :header %>
+  <hr>
+</head>
+
+<header>
+
+</header>
+
+<body>
+
+<%= yield %>
+
+</body>
+
+
+<footer>
+<hr>
+This is our 99 Cats site. Meow Meow Meow!
+<%= yield :footer %>
+</footer>
+</html>
